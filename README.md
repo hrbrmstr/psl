@@ -34,6 +34,7 @@ You need a recent `libpsl`.
   - macOS: `brew install libpsl`
   - Debian/Ubuntu-ish: Many repos have old versions so build from source
     and run `ldconfig` afterwards
+  - Windows: Just use `urltools::suffix_extract()`
 
 ## Installation
 
