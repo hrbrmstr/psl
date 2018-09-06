@@ -17,7 +17,7 @@ Description: The 'Public Suffix List' (<https://publicsuffix.org/>) is a collect
    to extract internet domain components using the public suffix list base data.
 URL: https://gitlab.com/hrbrmstr/psl
 BugReports: https://gitlab.com/hrbrmstr/psl/issues
-SystemRequirements: C++11
+SystemRequirements: C++11; libpsl
 Encoding: UTF-8
 License: MIT + file LICENSE
 Suggests:
