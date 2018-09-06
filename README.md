@@ -27,6 +27,14 @@ The following functions are implemented:
   - `suffix_extract2`: Separate a domain into component parts (urltools
     compatible output)
 
+## PRE-Installation
+
+You need a recent `libpsl`.
+
+  - macOS: `brew install libpsl`
+  - Debian/Ubuntu-ish: Many repos have old versions so build from source
+    and run `ldconfig` afterwards
+
 ## Installation
 
 ``` r
