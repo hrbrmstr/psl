@@ -10,7 +10,7 @@ knitr::opts_chunk$set(
 
 # psl
 
-  Extract Internet Domain Components Using the Public Suffix List
+Extract Internet Domain Components Using the Public Suffix List
 
 ## Description
 
