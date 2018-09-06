@@ -4,9 +4,18 @@
 \name{psl}
 \alias{psl}
 \alias{psl-package}
-\title{...}
+\title{Extract Internet Domain Components Using the Public Suffix List}
 \description{
+The 'Public Suffix List' (\url{https://publicsuffix.org/}) is a collection
+of top-level domains ('TLDs') which include global top-level domainsa ('gTLDs')
+such as '.com' and '.net'; country top-level domains ('ccTLDs') such as '.de' and
+'.cn'; and, brand top-level domains such as '.apple' and '.google'. Tools are provided
+to extract internet domain components using the public suffix list base data.
+}
+\details{
 \itemize{
+\item \code{libpsl}: \url{https://github.com/rockdaboot/libpsl}
+\item Public Suffix List: \url{https://publicsuffix.org/}
 \item URL: \url{https://gitlab.com/hrbrmstr/psl}
 \item BugReports: \url{https://gitlab.com/hrbrmstr/psl/issues}
 }
