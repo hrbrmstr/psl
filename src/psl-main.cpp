@@ -1,5 +1,4 @@
 #include <Rcpp.h>
-#include <regex>
 #include <libpsl.h>
 
 using namespace Rcpp;
@@ -24,24 +23,14 @@ CharacterVector apex_domain(CharacterVector domains) {
 
     // remove trailing period if any
     std::string cleaned = Rcpp::as<std::string>(domains[i]);
-    if (cleaned.length() > 0) {
-      if (cleaned.at(cleaned.length()-1) == '.') cleaned.pop_back();
-    }
+    if ((cleaned.length() > 0) && (cleaned.at(cleaned.length()-1) == '.')) cleaned.pop_back();
 
     // lowercase it
-    rc = psl_str_to_utf8lower(
-      cleaned.c_str(),
-      "utf-8", "en",
-      &lower
-    );
+    rc = psl_str_to_utf8lower(cleaned.c_str(), "utf-8", "en", &lower);
 
     if (rc == PSL_SUCCESS) {
       result = psl_registrable_domain(psl, lower);
-      if (result) {
-        output[i] = std::string(result);
-      } else {
-        output[i] = NA_STRING;
-      }
+      output[i] = (result) ? String(result) : NA_STRING;
     } else {
       output[i] = NA_STRING;
     }
@@ -74,24 +63,14 @@ CharacterVector public_suffix(CharacterVector domains) {
 
     // remove trailing period if any
     std::string cleaned = Rcpp::as<std::string>(domains[i]);
-    if (cleaned.length() > 0) {
-      if (cleaned.at(cleaned.length()-1) == '.') cleaned.pop_back();
-    }
+    if ((cleaned.length() > 0) && (cleaned.at(cleaned.length()-1) == '.')) cleaned.pop_back();
 
     // lowercase it
-    rc = psl_str_to_utf8lower(
-      cleaned.c_str(),
-      "utf-8", "en",
-      &lower
-    );
+    rc = psl_str_to_utf8lower(cleaned.c_str(), "utf-8", "en", &lower);
 
     if (rc == PSL_SUCCESS) {
       result = psl_unregistrable_domain(psl, lower);
-      if (result) {
-        output[i] = std::string(result);
-      } else {
-        output[i] = NA_STRING;
-      }
+      output[i] = (result) ? String(result) : NA_STRING;
     } else {
       output[i] = NA_STRING;
     }
@@ -111,10 +90,10 @@ CharacterVector public_suffix(CharacterVector domains) {
 //' @return character vector
 //' @export
 // [[Rcpp::export]]
-std::vector< bool > is_public_suffix(CharacterVector domains) {
+LogicalVector is_public_suffix(CharacterVector domains) {
 
   unsigned int input_size = domains.size();
-  std::vector < bool > output(input_size);
+  LogicalVector output(input_size);
   char *lower = NULL;
   int rc;
   const psl_ctx_t *psl = psl_builtin();
@@ -123,22 +102,12 @@ std::vector< bool > is_public_suffix(CharacterVector domains) {
 
     // remove trailing period if any
     std::string cleaned = Rcpp::as<std::string>(domains[i]);
-    if (cleaned.length() > 0) {
-      if (cleaned.at(cleaned.length()-1) == '.') cleaned.pop_back();
-    }
+    if ((cleaned.length() > 0) && (cleaned.at(cleaned.length()-1) == '.')) cleaned.pop_back();
 
     // lowercase it
-    rc = psl_str_to_utf8lower(
-      cleaned.c_str(),
-      "utf-8", "en",
-      &lower
-    );
+    rc = psl_str_to_utf8lower(cleaned.c_str(), "utf-8", "en", &lower);
 
-    if (rc == PSL_SUCCESS) {
-      output[i] = (psl_is_public_suffix(psl, lower) == 1);
-    } else {
-      output[i] = NA_LOGICAL;
-    }
+    output[i] =(rc == PSL_SUCCESS) ? (psl_is_public_suffix(psl, lower) == 1) : NA_LOGICAL;
 
     psl_free_string(lower);
 
@@ -174,51 +143,41 @@ DataFrame suffix_extract(CharacterVector domains) {
 
     // remove trailing period if any
     std::string cleaned = Rcpp::as<std::string>(domains[i]);
-    if (cleaned.length() > 0) {
-      if (cleaned.at(cleaned.length()-1) == '.') cleaned.pop_back();
-    }
+    if ((cleaned.length() > 0) && (cleaned.at(cleaned.length()-1) == '.')) cleaned.pop_back();
 
     // lowercase it
-    rc = psl_str_to_utf8lower(
-      cleaned.c_str(),
-      "utf-8", "en",
-      &lower
-    );
+    rc = psl_str_to_utf8lower(cleaned.c_str(), "utf-8", "en", &lower);
 
     if (rc == PSL_SUCCESS) {
 
       // no dots at end and lowercased
-      normalized[i] = std::string(lower);
+      std::string normd = std::string(lower);
+      normalized[i] = normd;
 
       // try to get the suffix
       result = psl_unregistrable_domain(psl, lower);
-      if (result) {
-        suffix[i] = std::string(result);
-      } else {
-        suffix[i] = NA_STRING;
-      }
+      std::string suf = std::string(result);
+      suffix[i] = (result) ? String(result) : NA_STRING;
 
       // try to get the apex
       result = psl_registrable_domain(psl, lower);
+      apex[i] = (result) ? String(result) : NA_STRING;
+
       if (result) {
-        apex[i] = std::string(result);
-      } else {
-        apex[i] = NA_STRING;
-      }
 
-      if ((suffix[i] != NA_STRING) && (apex[i] != NA_STRING)) {
+        std::string apx = std::string(result);
 
-        std::regex trail_suf("[\\.]*" + Rcpp::as<std::string>(suffix[i]) + "$");
-        domain[i] = std::regex_replace(
-          Rcpp::as<std::string>(apex[i]),
-          trail_suf, ""
-        );
+        int suf_pos = apx.rfind(suf);
+        std::string dom = apx.substr(0, suf_pos);
 
-        std::regex apex_suf("[\\.]*" + Rcpp::as<std::string>(apex[i]) + "$");
-        subdomain[i] = std::regex_replace(
-          Rcpp::as<std::string>(normalized[i]),
-          apex_suf, ""
-        );
+        int apex_pos = normd.rfind(apx);
+        std::string subdom = (apex_pos == 0) ? "" : normd.substr(0, apex_pos);
+
+        if ((dom.length() > 0) && (dom.at(dom.length()-1) == '.')) dom.pop_back();
+        if ((subdom.length() > 0) && (subdom.at(subdom.length()-1) == '.')) subdom.pop_back();
+
+        domain[i] = dom;
+        subdomain[i] = subdom;
 
       } else {
         domain[i] = NA_STRING;
@@ -253,7 +212,7 @@ DataFrame suffix_extract(CharacterVector domains) {
 
 }
 
-//' Separate a domain into component parts
+//' Separate a domain into component parts (`urltools` compatibility function)
 //'
 //' Compatibility function for those using `urltools::suffix_extract()`
 //'
@@ -272,22 +231,16 @@ DataFrame suffix_extract2(CharacterVector domains) {
 
   char *lower = NULL;
   int rc;
-  const char * result;
+  const char *result;
   const psl_ctx_t *psl = psl_builtin();
 
   for (unsigned int i = 0; i < input_size; i++) {
 
     std::string cleaned = Rcpp::as<std::string>(domains[i]);
-    if (cleaned.length() > 0) {
-      if (cleaned.at(cleaned.length()-1) == '.') cleaned.pop_back();
-    }
+    if ((cleaned.length() > 0) && (cleaned.at(cleaned.length()-1) == '.')) cleaned.pop_back();
 
     // lowercase it
-    rc = psl_str_to_utf8lower(
-      cleaned.c_str(),
-      "utf-8", "en",
-      &lower
-    );
+    rc = psl_str_to_utf8lower(cleaned.c_str(), "utf-8", "en", &lower);
 
     if (rc == PSL_SUCCESS) {
 
@@ -307,11 +260,17 @@ DataFrame suffix_extract2(CharacterVector domains) {
 
           std::string apex(result);
 
-          std::regex trail_suf("[\\.]*" + suf + "$");
-          std::regex apex_suf("[\\.]*" + apex + "$");
+          int suf_pos = apex.rfind(suf);
+          std::string dom = apex.substr(0, suf_pos);
 
-          domain[i] = std::regex_replace(apex, trail_suf, "");
-          subdomain[i] = std::regex_replace(normalized, apex_suf, "");
+          int apex_pos = normalized.rfind(apex);
+          std::string subdom = (apex_pos == 0) ? "" : normalized.substr(0, apex_pos);
+
+          if ((dom.length() > 0) && (dom.at(dom.length()-1) == '.')) dom.pop_back();
+          if ((subdom.length() > 0) && (subdom.at(subdom.length()-1) == '.')) subdom.pop_back();
+
+          domain[i] = (dom);
+          subdomain[i] = (subdom);
 
         } else {
           subdomain[i] = NA_STRING;
@@ -340,8 +299,6 @@ DataFrame suffix_extract2(CharacterVector domains) {
     _["suffix"] = suffix,
     _["stringsAsFactors"] = false
   );
-
-  out.attr("class") = CharacterVector::create("tbl_df", "tbl", "data.frame");
 
   return(out);
 

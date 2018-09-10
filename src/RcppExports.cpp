@@ -28,7 +28,7 @@ BEGIN_RCPP
 END_RCPP
 }
 // is_public_suffix
-std::vector< bool > is_public_suffix(CharacterVector domains);
+LogicalVector is_public_suffix(CharacterVector domains);
 RcppExport SEXP _psl_is_public_suffix(SEXP domainsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;

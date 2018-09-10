@@ -116,20 +116,67 @@ suffix_extract(doms)
 ## # ... with 50 more rows
 
 suffix_extract2(doms) # urltools compatible output
-## # A tibble: 60 x 4
-##    host             subdomain domain  suffix  
-##    <chr>            <chr>     <chr>   <chr>   
-##  1 ""               <NA>      <NA>    ""      
-##  2 com              <NA>      <NA>    com     
-##  3 example.com      ""        example com     
-##  4 www.example.com  www       example com     
-##  5 .com             <NA>      <NA>    .com    
-##  6 .example         <NA>      <NA>    .example
-##  7 .example.com     <NA>      <NA>    com     
-##  8 .example.example <NA>      <NA>    example 
-##  9 example          <NA>      <NA>    example 
-## 10 example.example  ""        example example 
-## # ... with 50 more rows
+##                   host subdomain  domain       suffix
+## 1                           <NA>    <NA>             
+## 2                  com      <NA>    <NA>          com
+## 3          example.com           example          com
+## 4      www.example.com       www example          com
+## 5                 .com      <NA>    <NA>         .com
+## 6             .example      <NA>    <NA>     .example
+## 7         .example.com      <NA>    <NA>          com
+## 8     .example.example      <NA>    <NA>      example
+## 9              example      <NA>    <NA>      example
+## 10     example.example           example      example
+## 11   b.example.example         b example      example
+## 12 a.b.example.example       a.b example      example
+## 13                 biz      <NA>    <NA>          biz
+## 14          domain.biz            domain          biz
+## 15        b.domain.biz         b  domain          biz
+## 16      a.b.domain.biz       a.b  domain          biz
+## 17                 com      <NA>    <NA>          com
+## 18         example.com           example          com
+## 19       b.example.com         b example          com
+## 20     a.b.example.com       a.b example          com
+## 21              uk.com      <NA>    <NA>       uk.com
+## 22      example.uk.com           example       uk.com
+## 23    b.example.uk.com         b example       uk.com
+## 24  a.b.example.uk.com       a.b example       uk.com
+## 25             test.ac              test           ac
+## 26                  cy      <NA>    <NA>           cy
+## 27                c.cy                 c           cy
+## 28              b.c.cy         b       c           cy
+## 29            a.b.c.cy       a.b       c           cy
+## 30                  jp      <NA>    <NA>           jp
+## 31             test.jp              test           jp
+## 32         www.test.jp       www    test           jp
+## 33               ac.jp      <NA>    <NA>        ac.jp
+## 34          test.ac.jp              test        ac.jp
+## 35      www.test.ac.jp       www    test        ac.jp
+## 36            kyoto.jp      <NA>    <NA>     kyoto.jp
+## 37       test.kyoto.jp              test     kyoto.jp
+## 38        ide.kyoto.jp      <NA>    <NA> ide.kyoto.jp
+## 39      b.ide.kyoto.jp                 b ide.kyoto.jp
+## 40    a.b.ide.kyoto.jp         a       b ide.kyoto.jp
+## 41           c.kobe.jp      <NA>    <NA>    c.kobe.jp
+## 42         b.c.kobe.jp                 b    c.kobe.jp
+## 43       a.b.c.kobe.jp         a       b    c.kobe.jp
+## 44        city.kobe.jp              city      kobe.jp
+## 45    www.city.kobe.jp       www    city      kobe.jp
+## 46                  ck      <NA>    <NA>           ck
+## 47             test.ck      <NA>    <NA>      test.ck
+## 48           b.test.ck                 b      test.ck
+## 49         a.b.test.ck         a       b      test.ck
+## 50              www.ck               www           ck
+## 51          www.www.ck       www     www           ck
+## 52                  us      <NA>    <NA>           us
+## 53             test.us              test           us
+## 54         www.test.us       www    test           us
+## 55               ak.us      <NA>    <NA>        ak.us
+## 56          test.ak.us              test        ak.us
+## 57      www.test.ak.us       www    test        ak.us
+## 58           k12.ak.us      <NA>    <NA>    k12.ak.us
+## 59      test.k12.ak.us              test    k12.ak.us
+## 60  www.test.k12.ak.us       www    test    k12.ak.us
 ```
 
 ``` r

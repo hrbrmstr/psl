@@ -41,7 +41,7 @@ suffix_extract <- function(domains) {
     .Call('_psl_suffix_extract', PACKAGE = 'psl', domains)
 }
 
-#' Separate a domain into component parts
+#' Separate a domain into component parts (`urltools` compatibility function)
 #'
 #' Compatibility function for those using `urltools::suffix_extract()`
 #'
