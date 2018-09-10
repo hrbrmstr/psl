@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcppExports.R
 \name{suffix_extract2}
 \alias{suffix_extract2}
-\title{Separate a domain into component parts}
+\title{Separate a domain into component parts (\code{urltools} compatibility function)}
 \usage{
 suffix_extract2(domains)
 }

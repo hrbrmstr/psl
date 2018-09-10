@@ -1,0 +1,8 @@
+CXX_STD = CXX11
+PKG_CXXFLAGS=@cflags@
+PKG_LIBS=@libs@
+
+all: clean
+
+clean:
+	rm -f $(SHLIB) $(OBJECTS)
