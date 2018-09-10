@@ -34,8 +34,8 @@ The following functions are implemented:
 You need a recent `libpsl`. 
 
 - macOS: `brew install libpsl`
-- Debian/Ubuntu-ish: Many repos have old versions so build from source and run `ldconfig` afterwards
-- Windows: Just use `urltools::suffix_extract()`
+- Debian/Ubuntu-ish: Many repos have old versions so it's _highly_ suggested that you build from source and ensure the library & header files are accessible
+- Windows: Just use `urltools::suffix_extract()` until winlibs are available for psl
 
 ## Installation
 
@@ -83,7 +83,7 @@ is_public_suffix(doms)
 
 suffix_extract(doms)
 
-suffix_extract2(doms) # urltools compatible output
+str(suffix_extract2(doms)) # urltools compatible output
 ```
 
 ```{r bench, message=FALSE, warning=FALSE, error=FALSE, fig.width=10, fig.retina=2}

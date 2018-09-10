@@ -70,7 +70,13 @@ CharacterVector public_suffix(CharacterVector domains) {
 
     if (rc == PSL_SUCCESS) {
       result = psl_unregistrable_domain(psl, lower);
-      output[i] = (result) ? String(result) : NA_STRING;
+      if (result) {
+        std::string res(result);
+        if ((res.length() > 0) && (res.at(0) == '.')) res.erase(0, 1);
+        output[i] = res;
+      } else {
+        output[i] = NA_STRING;
+      }
     } else {
       output[i] = NA_STRING;
     }
@@ -157,7 +163,12 @@ DataFrame suffix_extract(CharacterVector domains) {
       // try to get the suffix
       result = psl_unregistrable_domain(psl, lower);
       std::string suf = std::string(result);
-      suffix[i] = (result) ? String(result) : NA_STRING;
+      if (result) {
+        if ((suf.length() > 0) && (suf.at(0) == '.')) suf.erase(0, 1);
+        suffix[i] = suf;
+      } else {
+        suffix[i] = NA_STRING;
+      }
 
       // try to get the apex
       result = psl_registrable_domain(psl, lower);
@@ -252,6 +263,7 @@ DataFrame suffix_extract2(CharacterVector domains) {
       if (result) {
 
         std::string suf = std::string(result);
+        if ((suf.length() > 0) && (suf.at(0) == '.')) suf.erase(0, 1);
         suffix[i] = suf;
 
         result = psl_registrable_domain(psl, lower);
