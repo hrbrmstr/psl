@@ -1,6 +1,6 @@
 CXX_STD = CXX11
-PKG_CXXFLAGS=-I/usr/local/include
-PKG_LIBS=-L/usr/local/lib -lpsl
+PKG_CXXFLAGS=-I/opt/homebrew/Cellar/libpsl/0.21.1_4/include -I/opt/homebrew/Cellar/icu4c/70.1/include
+PKG_LIBS=-L/opt/homebrew/Cellar/libpsl/0.21.1_4/lib -lpsl
 
 all: clean
 

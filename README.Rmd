@@ -33,7 +33,7 @@ The following functions are implemented:
 
 You need a recent `libpsl`. 
 
-- macOS: `brew install libpsl`
+- macOS: `brew install libpsl libicu4c && brew link icu4c --force`
 - Debian/Ubuntu-ish: Many repos have old versions so it's _highly_ suggested that you build from source and ensure the library & header files are accessible
 - Windows: Just use `urltools::suffix_extract()` until winlibs are available for psl
 

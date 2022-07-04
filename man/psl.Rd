@@ -3,7 +3,6 @@
 \docType{package}
 \name{psl}
 \alias{psl}
-\alias{psl-package}
 \title{Extract Internet Domain Components Using the Public Suffix List}
 \description{
 The 'Public Suffix List' (\url{https://publicsuffix.org/}) is a collection

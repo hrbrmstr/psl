@@ -27,5 +27,5 @@ Depends:
     R (>= 3.2.0)
 Imports:
     Rcpp
-RoxygenNote: 6.0.1.9000
+RoxygenNote: 7.2.0
 LinkingTo: Rcpp

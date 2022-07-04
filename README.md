@@ -8,34 +8,34 @@ Extract Internet Domain Components Using the Public Suffix List
 The ‘Public Suffix List’ (<https://publicsuffix.org/>) is a collection
 of top-level domains (‘TLDs’) which include global top-level domainsa
 (‘gTLDs’) such as ‘.com’ and ‘.net’; country top-level domains
-(‘ccTLDs’) such as ‘.de’ and ‘.cn’; and, brand top-level domains such
-as ‘.apple’ and ‘.google’. Tools are provided to extract internet domain
+(‘ccTLDs’) such as ‘.de’ and ‘.cn’; and, brand top-level domains such as
+‘.apple’ and ‘.google’. Tools are provided to extract internet domain
 components using the public suffix list base data.
 
-  - `libpsl`: <https://github.com/rockdaboot/libpsl>
-  - Public Suffix List: <https://publicsuffix.org/>
+-   `libpsl`: <https://github.com/rockdaboot/libpsl>
+-   Public Suffix List: <https://publicsuffix.org/>
 
 ## What’s Inside The Tin
 
 The following functions are implemented:
 
-  - `apex_domain`: Return the apex/top-private domain from a vector of
+-   `apex_domain`: Return the apex/top-private domain from a vector of
     domains
-  - `is_public_suffix`: Test whether a domain is a public suffix
-  - `public_suffix`: Return the public suffix from a vector of domains
-  - `suffix_extract`: Separate a domain into component parts
-  - `suffix_extract2`: Separate a domain into component parts (urltools
+-   `is_public_suffix`: Test whether a domain is a public suffix
+-   `public_suffix`: Return the public suffix from a vector of domains
+-   `suffix_extract`: Separate a domain into component parts
+-   `suffix_extract2`: Separate a domain into component parts (urltools
     compatible output)
 
 ## PRE-Installation
 
 You need a recent `libpsl`.
 
-  - macOS: `brew install libpsl`
-  - Debian/Ubuntu-ish: Many repos have old versions so it’s *highly*
+-   macOS: `brew install libpsl libicu4c && brew link icu4c --force`
+-   Debian/Ubuntu-ish: Many repos have old versions so it’s *highly*
     suggested that you build from source and ensure the library & header
     files are accessible
-  - Windows: Just use `urltools::suffix_extract()` until winlibs are
+-   Windows: Just use `urltools::suffix_extract()` until winlibs are
     available for psl
 
 ## Installation
@@ -102,20 +102,20 @@ is_public_suffix(doms)
 ## [58]  TRUE FALSE FALSE
 
 suffix_extract(doms)
-## # A tibble: 60 x 6
-##    orig             normalized       subdomain apex            domain  suffix 
-##    <chr>            <chr>            <chr>     <chr>           <chr>   <chr>  
-##  1 ""               ""               <NA>      <NA>            <NA>    ""     
-##  2 com              com              <NA>      <NA>            <NA>    com    
-##  3 example.com      example.com      ""        example.com     example com    
-##  4 www.example.com  www.example.com  www       example.com     example com    
-##  5 .com             .com             <NA>      <NA>            <NA>    com    
-##  6 .example         .example         <NA>      <NA>            <NA>    example
-##  7 .example.com     .example.com     <NA>      <NA>            <NA>    com    
-##  8 .example.example .example.example <NA>      <NA>            <NA>    example
-##  9 example          example          <NA>      <NA>            <NA>    example
-## 10 example.example  example.example  ""        example.example example example
-## # ... with 50 more rows
+## # A tibble: 60 × 6
+##    orig               normalized         subdomain apex            domain  suffix   
+##    <chr>              <chr>              <chr>     <chr>           <chr>   <chr>    
+##  1 ""                 ""                  <NA>     <NA>            <NA>    ""       
+##  2 "com"              "com"               <NA>     <NA>            <NA>    "com"    
+##  3 "example.com"      "example.com"      ""        example.com     example "com"    
+##  4 "www.example.com"  "www.example.com"  "www"     example.com     example "com"    
+##  5 ".com"             ".com"              <NA>     <NA>            <NA>    "com"    
+##  6 ".example"         ".example"          <NA>     <NA>            <NA>    "example"
+##  7 ".example.com"     ".example.com"      <NA>     <NA>            <NA>    "com"    
+##  8 ".example.example" ".example.example"  <NA>     <NA>            <NA>    "example"
+##  9 "example"          "example"           <NA>     <NA>            <NA>    "example"
+## 10 "example.example"  "example.example"  ""        example.example example "example"
+## # … with 50 more rows
 
 str(suffix_extract2(doms)) # urltools compatible output
 ## 'data.frame':    60 obs. of  4 variables:
