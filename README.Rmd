@@ -40,7 +40,7 @@ You need a recent `libpsl`.
 ## Installation
 
 ```{r eval=FALSE}
-devtools::install_github("hrbrmstr/psl")
+remotes::install_github("hrbrmstr/psl")
 ```
 
 ```{r message=FALSE, warning=FALSE, error=FALSE, include=FALSE}

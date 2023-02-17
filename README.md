@@ -12,36 +12,36 @@ of top-level domains (‘TLDs’) which include global top-level domainsa
 ‘.apple’ and ‘.google’. Tools are provided to extract internet domain
 components using the public suffix list base data.
 
--   `libpsl`: <https://github.com/rockdaboot/libpsl>
--   Public Suffix List: <https://publicsuffix.org/>
+- `libpsl`: <https://github.com/rockdaboot/libpsl>
+- Public Suffix List: <https://publicsuffix.org/>
 
 ## What’s Inside The Tin
 
 The following functions are implemented:
 
--   `apex_domain`: Return the apex/top-private domain from a vector of
-    domains
--   `is_public_suffix`: Test whether a domain is a public suffix
--   `public_suffix`: Return the public suffix from a vector of domains
--   `suffix_extract`: Separate a domain into component parts
--   `suffix_extract2`: Separate a domain into component parts (urltools
-    compatible output)
+- `apex_domain`: Return the apex/top-private domain from a vector of
+  domains
+- `is_public_suffix`: Test whether a domain is a public suffix
+- `public_suffix`: Return the public suffix from a vector of domains
+- `suffix_extract`: Separate a domain into component parts
+- `suffix_extract2`: Separate a domain into component parts (urltools
+  compatible output)
 
 ## PRE-Installation
 
 You need a recent `libpsl`.
 
--   macOS: `brew install libpsl libicu4c && brew link icu4c --force`
--   Debian/Ubuntu-ish: Many repos have old versions so it’s *highly*
-    suggested that you build from source and ensure the library & header
-    files are accessible
--   Windows: Just use `urltools::suffix_extract()` until winlibs are
-    available for psl
+- macOS: `brew install libpsl libicu4c && brew link icu4c --force`
+- Debian/Ubuntu-ish: Many repos have old versions so it’s *highly*
+  suggested that you build from source and ensure the library & header
+  files are accessible
+- Windows: Just use `urltools::suffix_extract()` until winlibs are
+  available for psl
 
 ## Installation
 
 ``` r
-devtools::install_github("hrbrmstr/psl")
+remotes::install_github("hrbrmstr/psl")
 ```
 
 ## Usage
@@ -52,7 +52,7 @@ library(tidyverse)
 
 # current verison
 packageVersion("psl")
-## [1] '0.1.0'
+## [1] '0.1.1'
 ```
 
 ``` r

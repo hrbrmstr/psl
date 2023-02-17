@@ -1,8 +1,8 @@
 Package: psl
 Type: Package
 Title: Extract Internet Domain Components Using the Public Suffix List
-Version: 0.1.0
-Date: 2018-09-06
+Version: 0.1.1
+Date: 2023-01-17
 Authors@R: c(
     person("Bob", "Rudis", email = "bob@rud.is", role = c("aut", "cre"), 
            comment = c(ORCID = "0000-0001-5670-2640")),
@@ -15,8 +15,8 @@ Description: The 'Public Suffix List' (<https://publicsuffix.org/>) is a collect
    such as '.com' and '.net'; country top-level domains ('ccTLDs') such as '.de' and
    '.cn'; and, brand top-level domains such as '.apple' and '.google'. Tools are provided
    to extract internet domain components using the public suffix list base data.
-URL: https://gitlab.com/hrbrmstr/psl
-BugReports: https://gitlab.com/hrbrmstr/psl/issues
+URL: https://gihub.com/hrbrmstr/psl
+BugReports: https://github.com/hrbrmstr/psl/issues
 SystemRequirements: C++11; libpsl
 Encoding: UTF-8
 License: MIT + file LICENSE
@@ -27,5 +27,5 @@ Depends:
     R (>= 3.2.0)
 Imports:
     Rcpp
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.3
 LinkingTo: Rcpp
